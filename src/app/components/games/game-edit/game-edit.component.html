@@ -1,0 +1,106 @@
+<div class="row">
+        <div class="col-xs-12">
+          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-success" [disabled]="!gameForm.valid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" formControlName="name" class="form-control" ngModel="{{currentGame?.name}}">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="imagePath">Image URL</label>
+                  <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePath ngModel="{{currentGame?.imagePath}}">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <img [src]="imagePath.value" class="img-responsive">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea type="text" id="description" class="form-control" formControlName="description" rows="6"
+                  ngModel={{currentGame?.description}}></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" formArrayName="characters">
+                    
+                    <div class="row" *ngFor="let characterCtrl of gameForm['controls'].characters['controls']; let i = index" [formGroupName]="i"
+                      style="margin-top: 10px;">
+                      <!-- De volgende regel voeg je ook toe -->
+                      <pre *ngIf="characterCtrl">{{ characterCtrl.value | json }}</pre>
+                      <div class="col-xs-8">
+                        <label for="name">Name</label>                          
+                        <input type="text" class="form-control" formControlName="name">
+                      </div>
+                      <div class="col-xs-8">
+                        <label for="description">Description</label>                          
+                        <input type="text" class="form-control" formControlName="description">
+                      </div>
+                      <div class="col-xs-8">
+                          <label for="imagePath">Image URL</label>                          
+                          <input type="text" class="form-control" formControlName="imagePath">
+                        </div>
+                      <div class="col-xs-2">
+                        <p></p>
+                          <button type="button" class="btn btn-danger" (click)="onDeleteCharacter(i)">X</button>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <button type="button" class="btn btn-success" (click)="onAddCharacter()">Add Character</button>
+                      </div>
+                    </div>
+                    <br/>
+                    <br/>
+                  </div>
+            </div>
+            <div class="row">
+                    <div class="col-xs-12" formArrayName="developers">
+                        
+                        <div class="row" *ngFor="let developerCtrl of gameForm['controls'].developers['controls']; let i = index" [formGroupName]="i"
+                          style="margin-top: 10px;">
+                          <!-- De volgende regel voeg je ook toe -->
+                          <pre *ngIf="characterCtrl">{{ developerCtrl.value | json }}</pre>
+                          <div class="col-xs-8">
+                            <label for="name">Name</label>                          
+                            <input type="text" class="form-control" formControlName="name">
+                          </div>
+                          <div class="col-xs-8">
+                            <label for="imagePath">Image URL</label>                          
+                            <input type="text" class="form-control" formControlName="imagePath">
+                          </div>
+                          <div class="col-xs-2">
+                            <p></p>
+                              <button type="button" class="btn btn-danger" (click)="onDeleteDeveloper(i)">X</button>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <button type="button" class="btn btn-success" (click)="onAddDeveloper()">Add Developer</button>
+                          </div>
+                        </div>
+                        <br/>
+                        <br/>
+                      </div>
+                </div>
+          </form>
+        </div>
+      </div>

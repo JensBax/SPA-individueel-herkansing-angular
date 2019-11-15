@@ -1,0 +1,135 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+
+import { GameService } from '../../../services/game.service';
+import { Game } from '../../../models/game.model';
+
+@Component({
+  selector: 'app-game-edit',
+  templateUrl: './game-edit.component.html'
+})
+export class GameEditComponent implements OnInit {
+  id: number;
+  editMode = false;
+  gameForm: FormGroup;
+  currentGame: Game = null;
+
+  constructor(private route: ActivatedRoute,
+              private gameService: GameService,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.editMode = params['id'] != null;
+          if(this.editMode){
+            this.gameService.getGame(this.id)
+            .then((game) => {
+              this.currentGame = game
+            })
+            .catch(error => console.log(error))
+          }
+          this.initForm();
+        }
+      );
+  }
+
+  onSubmit() {
+    if (this.editMode) {
+      this.gameService.updateGame(this.id, this.gameForm.value);
+    } else {
+      this.gameService.addGame(this.gameForm.value);
+    }
+    this.onCancel();
+  }
+
+  onAddCharacter() {
+    (<FormArray>this.gameForm.get('characters')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'description': new FormControl(null, Validators.required),
+        'imagePath': new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  onDeleteCharacter(index: number) {
+    (<FormArray>this.gameForm.get('characters')).removeAt(index);
+  }
+
+  onAddDeveloper() {
+    (<FormArray>this.gameForm.get('developers')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'imagePath': new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  onDeleteDeveloper(index: number) {
+    (<FormArray>this.gameForm.get('developers')).removeAt(index);
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  private initForm() {
+    let gameName = '';
+    let gameImagePath = '';
+    let gameDescription = '';
+    let gameCharacters = new FormArray([]);
+    let gameDevelopers = new FormArray([]);
+
+    if (this.editMode) {
+      this.gameService.getGame(this.id)
+      .then(
+        game => {
+        this.currentGame = game;
+        gameName = this.currentGame.name;
+        gameImagePath = this.currentGame.imagePath;
+        gameDescription = this.currentGame.description;
+         if (this.currentGame['characters']) {
+           for (let character of this.currentGame.characters) {
+               console.log("push character")
+             gameCharacters.push(
+               new FormGroup({
+                 'name': new FormControl(character.name, Validators.required),
+                 'description': new FormControl(character.description, Validators.required),
+                 'imagePath': new FormControl(character.imagePath, Validators.required)
+               })
+             );
+           }
+         }
+         if (this.currentGame['developers']) {
+            for (let developer of this.currentGame.developers) {
+                console.log("push developer")
+              gameDevelopers.push(
+                new FormGroup({
+                  'name': new FormControl(developer.name, Validators.required),
+                  'imagePath': new FormControl(developer.imagePath, Validators.required)
+                })
+              );
+            }
+          }
+        }
+      )
+      .catch(error => console.log(error));
+      
+    }
+
+    this.gameForm = new FormGroup({
+      'name': new FormControl(gameName, Validators.required),
+      'imagePath': new FormControl(gameImagePath, Validators.required),
+      'description': new FormControl(gameDescription, Validators.required),
+      'characters': gameCharacters,
+      'developers': gameDevelopers      
+    });
+  }
+  
+
+}
