@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpModule, Http } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +28,6 @@ import { CharactersComponent } from './components/characters/characters.componen
   declarations: [
     AppComponent,
     DropdownDirective,
-    DashboardComponent,
     HeaderComponent,
     GamesComponent,
     GameStartComponent,
