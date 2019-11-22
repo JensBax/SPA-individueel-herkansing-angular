@@ -55,7 +55,7 @@ export class GameService {
 
 public updateGame(index: number, newGame : Game){
     console.log("Game updaten");
-    this.http.put(this.serverUrl + "/" + this.games[index]._id, { name: newGame.name, description: newGame.description, imagePath: newGame.imagePath, characters: newGame.characters, developer: newGame.developers })
+    this.http.put(this.serverUrl + "/" + this.games[index]._id, { name: newGame.name, description: newGame.description, imagePath: newGame.imagePath, characters: newGame.characters, developers: newGame.developers })
       .toPromise()
       .then( () => {
         console.log("Game veranderd")

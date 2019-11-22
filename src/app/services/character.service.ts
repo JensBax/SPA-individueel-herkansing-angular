@@ -53,62 +53,55 @@ export class CharacterService {
       });
 }
 
-// public updateFilm(index: number, newFilm : Film){
-//     console.log("film updaten");
-//     this.http.put(this.serverUrl + "/" + this.films[index]._id, { name: newFilm.name, description: newFilm.description, imagePath: newFilm.imagePath, characters: newFilm.characters })
-//       .toPromise()
-//       .then( () => {
-//         console.log("film veranderd")
-//         this.getFilms()
-//         .then(
-//           films => {
-//             this.films = films
-//             this.filmsChanged.next(this.films.slice());
-//           }
-//         )
-//         .catch(error => console.log(error));
-//       })
-//       .catch( error => { return this.handleError(error) } );
-//   }
+public updateCharacter(index: number, newCharacter : Character){
+    this.http.put(this.serverUrl + "/" + this.characters[index]._id, { name: newCharacter.name, description: newCharacter.description, imagePath: newCharacter.imagePath})
+      .toPromise()
+      .then( () => {
+        this.getCharacters()
+        .then(
+          characters => {
+            this.characters = characters
+            this.charactersChanged.next(this.characters.slice());
+          }
+        )
+        .catch(error => console.log(error));
+      })
+      .catch( error => { return this.handleError(error) } );
+  }
 
-//   public deleteFilm(index: number){
-//     var deletedFilm = this.films[index];
-//     console.log("Film verwijderen");
-//     this.http.delete(this.serverUrl + "/" + this.films[index]._id)
-//       .toPromise()
-//       .then( () => {
-//         console.log("film verwijderd") 
-//         this.getFilms()
-//         .then(
-//           films => {
-//             this.films = films
-//             this.filmsChanged.next(this.films.slice());
-//           }
-//         )
-//         .catch(error => console.log(error));
-//       })
-//       .catch( error => { return this.handleError(error) } );
-//   }
+  public deleteCharacter(index: number){
+    var deletedCharacter = this.characters[index];
+    this.http.delete(this.serverUrl + "/" + this.characters[index]._id)
+      .toPromise()
+      .then( () => {
+        this.getCharacters()
+        .then(
+          characters => {
+            this.characters = characters
+            this.charactersChanged.next(this.characters.slice());
+          }
+        )
+        .catch(error => console.log(error));
+      })
+      .catch( error => { return this.handleError(error) } );
+  }
 
-//   public addFilm(film: Film, genreid : String) {
-//     console.log('film opslaan');
-//     this.http.post(this.serverUrl, { name: film.name, description: film.description, imagePath: film.imagePath, characters: film.characters, genreid: genreid, genre: film.genres })
-//       .toPromise() 
-//       .then( () => {
-//         console.log("film toegevoegd")
-//         this.getFilms()
-//         .then(
-//             films => {
-//                 this.films = films
-//                 this.filmsChanged.next(this.films.slice());
-//               }
-//         )
-//         .catch(error => console.log(error));
-//       }
-//       )
-//       .catch( error => { return this.handleError(error) } );
-
-//     }
+  public addCharacter(character: Character) {
+    this.http.post(this.serverUrl, { name: character.name, description: character.description, imagePath: character.imagePath})
+      .toPromise() 
+      .then( () => {
+        this.getCharacters()
+        .then(
+            characters => {
+                this.characters = characters
+                this.charactersChanged.next(this.characters.slice());
+              }
+        )
+        .catch(error => console.log(error));
+      }
+      )
+      .catch( error => { return this.handleError(error) } );
+    }
 
   private handleError(error: any): Promise<any> {
     console.log('handleError');

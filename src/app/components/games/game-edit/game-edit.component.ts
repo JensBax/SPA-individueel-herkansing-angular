@@ -95,7 +95,6 @@ export class GameEditComponent implements OnInit {
         gameDescription = this.currentGame.description;
          if (this.currentGame['characters']) {
            for (let character of this.currentGame.characters) {
-               console.log("push character")
              gameCharacters.push(
                new FormGroup({
                  'name': new FormControl(character.name, Validators.required),
@@ -107,7 +106,6 @@ export class GameEditComponent implements OnInit {
          }
          if (this.currentGame['developers']) {
             for (let developer of this.currentGame.developers) {
-                console.log("push developer")
               gameDevelopers.push(
                 new FormGroup({
                   'name': new FormControl(developer.name, Validators.required),

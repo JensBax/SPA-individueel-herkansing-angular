@@ -26,6 +26,7 @@ export class GameDetailComponent implements OnInit {
             .then(game => this.game = game)
             .catch(error => console.log(error));
         }
+        
       );
   }
 

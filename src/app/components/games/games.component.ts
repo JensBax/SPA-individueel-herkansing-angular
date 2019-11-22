@@ -9,6 +9,7 @@ import { GameService } from '../../services/game.service';
 })
 export class GamesComponent implements OnInit {
 
+  title="Games"
 
   constructor(private gameService: GameService) { }
 
