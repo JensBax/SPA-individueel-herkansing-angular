@@ -1,0 +1,26 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/register">{{ title }}</a>
+    </nav> -->
+<div class="container register-container">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6 register-form">
+            <h3>Register</h3>
+            <form (ngSubmit)="register(f)" #f="ngForm">
+                <label for="username" class="cols-sm-2 control-label">Your Username*</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="username" ngModel required #username="ngModel"/>
+                </div>
+                <label for="password" class="cols-sm-2 control-label">Your Password*</label>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="password" ngModel required/>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+                    Register
+                </button>
+                <div class="form-group">
+                    <span class="help-block">* = required</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -24,6 +24,12 @@ import { DeveloperEditComponent } from './components/developers/developer-edit/d
 import { DeveloperDetailComponent } from './components/developers/developer-detail/developer-detail.component';
 import { DevelopersComponent } from './components/developers/developers.component';
 
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login.service';
+
+import { RegisterComponent } from './components/register/register.component';
+import { RegisterService } from './services/register.service';
+
 import { CharacterService } from './services/character.service';
 import { CharactersComponent } from './components/characters/characters.component';  
 
@@ -42,6 +48,8 @@ import { CharactersComponent } from './components/characters/characters.componen
     DeveloperStartComponent,
     DeveloperEditComponent,
     DeveloperDetailComponent,
+    LoginComponent,
+    RegisterComponent,
     CharactersComponent,
   ],
   imports: [
@@ -57,6 +65,8 @@ import { CharactersComponent } from './components/characters/characters.componen
     GameService,
     DeveloperService,
     CharacterService,
+    LoginService,
+    RegisterService
   ],
   bootstrap: [AppComponent]
 })

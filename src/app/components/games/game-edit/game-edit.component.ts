@@ -46,8 +46,8 @@ export class GameEditComponent implements OnInit {
     if (this.editMode) {
       this.gameService.updateGame(this.id, this.gameForm.value);
     } else {
-      this.onCheckDeveloper(this.gameForm.value.developers);
-      // this.gameService.addGame(this.gameForm.value);
+      // this.onCheckDeveloper(this.gameForm.value.developers);
+      this.gameService.addGame(this.gameForm.value);
     }
     this.onCancel();
   }
@@ -75,25 +75,26 @@ export class GameEditComponent implements OnInit {
     );
   }
 
-  onCheckDeveloper(inDevelopers: Developer[]){
-    console.log(inDevelopers);
-    this.developerService.getDevelopers()
-    .then(developers => {
-        this.developers = developers
-        inDevelopers.forEach(developer =>{
-        for(var i=0; i <= developers.length; i++){
-          if(developers[i].name !== developer.name){
-            // this.developerService.addDeveloper(developer);
-            console.log("Developer bestaat nog niet " + developer.name);
-            console.log([i]+ " " +developers[i].name);
-            console.log(developer.name);
-          }
-        }
-      })
-        console.log(this.developers);
-    })
-    .catch(error => console.log(error));
-  }
+  // onCheckDeveloper(inDevelopers: Developer[]){
+  //   console.log(inDevelopers);
+  //   this.developerService.getDevelopers()
+  //   .then(developers => {
+  //       this.developers = developers
+  //       inDevelopers.forEach(developer =>{
+  //       for(var i=0; i <= developers.length; i++){
+  //         if(i == developers.length){
+  //           this.developerService.addDeveloper(developer);
+  //         }else if(developers[i].name !== developer.name){
+  //           console.log("Developer bestaat nog niet " + developer.name);
+  //           console.log([i]+ " " +developers[i].name);
+  //           console.log(developer.name);
+  //         }
+  //       }
+  //     })
+  //       console.log(this.developers);
+  //   })
+  //   .catch(error => console.log(error));
+  // }
 
   onDeleteDeveloper(index: number) {
     (<FormArray>this.gameForm.get('developers')).removeAt(index);
