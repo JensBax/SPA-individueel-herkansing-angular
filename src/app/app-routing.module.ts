@@ -7,6 +7,8 @@ import { GameEditComponent } from './components/games/game-edit/game-edit.compon
 import { GameDetailComponent } from './components/games/game-detail/game-detail.component';
 
 import { DevelopersComponent } from './components/developers/developers.component';
+import { DeveloperStartComponent } from './components/developers/developer-start/developer-start.component';
+import { DeveloperDetailComponent } from './components/developers/developer-detail/developer-detail.component';
 import { CharactersComponent } from './components/characters/characters.component';
 
 const appRoutes: Routes = [
@@ -18,7 +20,9 @@ const appRoutes: Routes = [
     { path: ':id/edit' , component: GameEditComponent }
   ]},
   { path: 'developers', component: DevelopersComponent, children: [
-    { path: '', component: DevelopersComponent}
+    { path: '', component: DeveloperStartComponent},
+    {path: ':id', component: DeveloperDetailComponent }
+
   ]},
   { path: 'characters', component: CharactersComponent, children: [
     { path: '', component: CharactersComponent}

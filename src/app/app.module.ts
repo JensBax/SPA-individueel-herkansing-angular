@@ -19,6 +19,9 @@ import { GameListComponent } from './components/games/game-list/game-list.compon
 import { GameItemComponent } from './components/games/game-list/game-item/game-item.component';
 
 import { DeveloperService } from './services/developer.service';
+import { DeveloperStartComponent } from './components/developers/developer-start/developer-start.component';
+import { DeveloperEditComponent } from './components/developers/developer-edit/developer-edit.component';
+import { DeveloperDetailComponent } from './components/developers/developer-detail/developer-detail.component';
 import { DevelopersComponent } from './components/developers/developers.component';
 
 import { CharacterService } from './services/character.service';
@@ -36,6 +39,9 @@ import { CharactersComponent } from './components/characters/characters.componen
     GameListComponent,
     GameItemComponent,
     DevelopersComponent,
+    DeveloperStartComponent,
+    DeveloperEditComponent,
+    DeveloperDetailComponent,
     CharactersComponent,
   ],
   imports: [

@@ -5,7 +5,7 @@ export class Developer {
     public imagePath: string;
 
       
-    constructor(name: string, desc: string, imagePath: string) {
+    constructor(name: string, imagePath: string) {
         this.name = name;
         this.imagePath = imagePath;
 

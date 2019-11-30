@@ -1,23 +1,31 @@
-<div class="page-header">
-        <h2>{{title}}</h2>
-      </div>
-      
-      <div *ngIf="developers" class="col-sm-6">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <td>Nr</td>
-              <td>Naam</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let developer of developers, let i = index">
-              <td>{{i+1}}</td>
-              <td>{{developer.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div *ngIf="!developers">
-          Er zijn geen developers gevonden
-      </div>
+  <div class="page-header">
+    <h2>{{title}}</h2>
+  </div>
+  <div class="row">
+    <div class="col-xs-7">
+      <app-developer-edit></app-developer-edit>
+      <hr>
+      <ul class="list-group">
+        <a
+          class="list-group-item"
+          style="cursor: pointer"
+          *ngFor="let developer of developers; let i = index"
+          (click)="onEditItem(i)"
+        >
+        <div class="media">
+          <div class="media-left">
+            <img [src]="developer.imagePath" class="media-object" style="width:80px">
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{ developer.name }}</h4>
+          </div>
+        </div>
+          <!-- {{ developer.name }} -->
+        </a>
+      </ul>
+    </div>
+  
+  <div class="col-xs-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>

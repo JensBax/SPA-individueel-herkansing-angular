@@ -3,7 +3,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { GameService } from '../../../services/game.service';
+import { DeveloperService } from '../../../services/developer.service';
 import { Game } from '../../../models/game.model';
+import { Developer } from '../../../models/developer.model';
 
 @Component({
   selector: 'app-game-edit',
@@ -14,10 +16,12 @@ export class GameEditComponent implements OnInit {
   editMode = false;
   gameForm: FormGroup;
   currentGame: Game = null;
+  developers: Developer[]
 
   constructor(private route: ActivatedRoute,
               private gameService: GameService,
-              private router: Router) {
+              private router: Router,
+              private developerService: DeveloperService) {
   }
 
   ngOnInit() {
@@ -42,7 +46,8 @@ export class GameEditComponent implements OnInit {
     if (this.editMode) {
       this.gameService.updateGame(this.id, this.gameForm.value);
     } else {
-      this.gameService.addGame(this.gameForm.value);
+      this.onCheckDeveloper(this.gameForm.value.developers);
+      // this.gameService.addGame(this.gameForm.value);
     }
     this.onCancel();
   }
@@ -68,6 +73,26 @@ export class GameEditComponent implements OnInit {
         'imagePath': new FormControl(null, Validators.required)
       })
     );
+  }
+
+  onCheckDeveloper(inDevelopers: Developer[]){
+    console.log(inDevelopers);
+    this.developerService.getDevelopers()
+    .then(developers => {
+        this.developers = developers
+        inDevelopers.forEach(developer =>{
+        for(var i=0; i <= developers.length; i++){
+          if(developers[i].name !== developer.name){
+            // this.developerService.addDeveloper(developer);
+            console.log("Developer bestaat nog niet " + developer.name);
+            console.log([i]+ " " +developers[i].name);
+            console.log(developer.name);
+          }
+        }
+      })
+        console.log(this.developers);
+    })
+    .catch(error => console.log(error));
   }
 
   onDeleteDeveloper(index: number) {

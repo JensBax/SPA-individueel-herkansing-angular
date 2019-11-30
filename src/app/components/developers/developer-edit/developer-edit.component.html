@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form (ngSubmit)="onSubmit(developerF)" #developerF="ngForm">
+        <div class="row">
+            <div class="col-sm-5 form-group">
+            <label for="name">Naam</label>
+            <input type="text" id="name" class="form-control" name="name" ngModel required >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 form-group">
+            <label for="imagePath">Image URL</label>
+            <input type="text" id="name" class="form-control" name="imagePath" ngModel required #imagePath>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 form-group">
+                <img [src]="imagePath.value" class="img-responsive">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+            <button 
+            class="btn btn-success" 
+            type="submit" 
+            [disabled]="!developerF.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+            <button 
+            class="btn btn-danger" 
+            type="button" 
+            (click)="onDelete()"
+            *ngIf="editMode">Delete</button>
+            <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

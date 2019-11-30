@@ -16,6 +16,7 @@ export class DeveloperService {
   private developers: Developer[] = [];
 
   developersChanged = new Subject<Developer[]>();
+  startedEditing = new Subject<number>();
   
   constructor(private http: Http) {
    }

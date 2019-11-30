@@ -39,7 +39,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12" formArrayName="characters">
-                    
                     <div class="row" *ngFor="let characterCtrl of gameForm['controls'].characters['controls']; let i = index" [formGroupName]="i"
                       style="margin-top: 10px;">
                       <pre *ngIf="characterCtrl">{{ characterCtrl.value | json }}</pre>
@@ -78,7 +77,6 @@
             </div>
             <div class="row">
                     <div class="col-xs-12" formArrayName="developers">
-                        
                         <div class="row" *ngFor="let developerCtrl of gameForm['controls'].developers['controls']; let i = index" [formGroupName]="i"
                           style="margin-top: 10px;">
                           <pre *ngIf="developerCtrl">{{ developerCtrl.value | json }}</pre>
