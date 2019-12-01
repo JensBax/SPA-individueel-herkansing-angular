@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,13 @@ export class HeaderComponent implements OnInit {
 
   title = 'My Games';
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+  }
+
+  onLogout(){
+    this.loginService.logout();
   }
 
 }

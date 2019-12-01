@@ -1,0 +1,56 @@
+<div class="row">
+        <div class="col-xs-12">
+          <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-success" [disabled]="!characterForm.valid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" formControlName="name" class="form-control" ngModel={{currentCharacter?.name}}>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" class="form-control" formControlName="description" ngModel={{currentCharacter?.description}}>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+              </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="imagePath">Image URL</label>
+                  <textarea type="text" id="imagePath" formControlName="imagePath" class="form-control" rows="6" #imagePath ngModel={{currentCharacter?.imagePath}}></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <img [src]="imagePath.value" class="img-responsive">
+              </div>
+            </div>
+            
+            <!-- <div  *ngIf="!editMode" class="row">
+              <div class="col-xs-12">
+                <h3>Please select one film.</h3>
+                  <ul>
+                    <li *ngFor = "let film of films">
+                      <label>
+                          <input type="checkbox" ng-model="leader" (click)="onChangeFilm(film)"> {{film.name}}
+                      </label>
+                    </li>
+                  </ul>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>

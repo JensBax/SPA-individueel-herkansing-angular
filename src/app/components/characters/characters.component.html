@@ -1,22 +1,11 @@
 <div class="page-header">
-        <h2>{{title}}</h2>
-      </div>
-      <div *ngIf="characters" class="col-sm-6">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <td>Nr</td>
-              <td>Naam</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let character of characters, let i = index">
-              <td>{{i+1}}</td>
-              <td>{{character.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div *ngIf="!characters">
-          Er zijn geen characters gevonden
-      </div>
+    <h2>{{title}}</h2>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <app-character-list></app-character-list>
+  </div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
+  </div>
+</div>

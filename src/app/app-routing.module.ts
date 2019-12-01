@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 import { GamesComponent } from './components/games/games.component';
 import { GameStartComponent } from './components/games/game-start/game-start.component';
@@ -15,14 +16,17 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { CharactersComponent } from './components/characters/characters.component';
+import { CharacterStartComponent } from './components/characters/character-start/character-start.component';
+import { CharacterDetailComponent } from './components/characters/character-detail/character-detail.component';
+import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/games', pathMatch: 'full'}, 
   { path: 'games', component: GamesComponent, children: [
     { path: '',component: GameStartComponent },
-    { path: 'new', component: GameEditComponent },
+    { path: 'new', component: GameEditComponent, canActivate: [AuthGuard]},
     { path: ':id', component: GameDetailComponent },
-    { path: ':id/edit' , component: GameEditComponent }
+    { path: ':id/edit' , component: GameEditComponent, canActivate: [AuthGuard] }
   ]},
   { path: 'developers', component: DevelopersComponent, children: [
     { path: '', component: DeveloperStartComponent},
@@ -30,7 +34,10 @@ const appRoutes: Routes = [
 
   ]},
   { path: 'characters', component: CharactersComponent, children: [
-    { path: '', component: CharactersComponent}
+    { path: '', component: CharacterStartComponent},
+    { path: 'new', component: CharacterEditComponent, canActivate: [AuthGuard]},
+    { path: ':id', component: CharacterDetailComponent },
+    { path: ':id/edit' , component: CharacterEditComponent, canActivate: [AuthGuard] }
   ]},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},

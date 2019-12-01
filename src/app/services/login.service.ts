@@ -26,7 +26,6 @@ export class LoginService {
 }
 
   public login(user: loginUser) {
-      console.log("hallo");
     this.http.post(this.loginUrl, {username: user.username, password: user.password}, {headers: this.headers})
     .toPromise()
     .then(response => {

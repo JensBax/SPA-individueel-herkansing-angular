@@ -9,6 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { DropdownDirective } from './components/shared/dropdown.directives';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from "./components/helpers/jwt.interceptor";
+import { AuthGuard } from "./guards/auth.guard";
 
 import { GameService } from './services/game.service';
 import { GamesComponent } from './components/games/games.component';
@@ -31,6 +34,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { RegisterService } from './services/register.service';
 
 import { CharacterService } from './services/character.service';
+import { CharacterListComponent } from './components/characters/character-list/character-list.component';
+import { CharacterStartComponent } from './components/characters/character-start/character-start.component';
+import { CharacterItemComponent } from './components/characters/character-list/character-item/character-item.component';
+import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
+import { CharacterDetailComponent } from './components/characters/character-detail/character-detail.component';
 import { CharactersComponent } from './components/characters/characters.component';  
 
 @NgModule({
@@ -51,16 +59,24 @@ import { CharactersComponent } from './components/characters/characters.componen
     LoginComponent,
     RegisterComponent,
     CharactersComponent,
+    CharacterStartComponent,
+    CharacterEditComponent,
+    CharacterDetailComponent,
+    CharacterListComponent,
+    CharacterItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    AuthGuard,
     UserService,
     GameService,
     DeveloperService,

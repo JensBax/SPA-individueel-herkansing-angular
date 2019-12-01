@@ -16,16 +16,10 @@ export class CharacterService {
   private characters: Character[] = [];
 
   charactersChanged = new Subject<Character[]>();
-  
-  //
-  //
-  //
+
   constructor(private http: Http) {
    }
 
-  //
-  //
-  //
   public getCharacters(): Promise<Character[]> {
     console.log('Characters ophalen van server');
     return this.http.get(this.serverUrl, { headers: this.headers })

@@ -1,23 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
-import { Character } from '../../models/character.model';
- 
+
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
-  providers: [CharacterService]
+  encapsulation: ViewEncapsulation.None,
+  providers:[CharacterService]
 })
 export class CharactersComponent implements OnInit {
 
-    title="Characters"
-    characters: Character[]
+  title="Characters";
 
-  constructor(private characterService: CharacterService) { }
+  constructor(private CharacterService: CharacterService) {
+  }
 
-  ngOnInit(): void {
-    this.characterService.getCharacters()
-      .then(characters => this.characters = characters)
-      .catch(error => console.log(error));
+  ngOnInit() {
   }
 
 }
