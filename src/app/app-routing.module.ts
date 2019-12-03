@@ -20,6 +20,11 @@ import { CharacterStartComponent } from './components/characters/character-start
 import { CharacterDetailComponent } from './components/characters/character-detail/character-detail.component';
 import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
 
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { FavoriteStartComponent } from './components/favorites/favorites-start/favorites-start.component';
+import { FavoriteDetailComponent } from './components/favorites/favorites-detail/favorites-detail.component';
+import { FavoriteEditComponent } from './components/favorites/favorites-edit/favorites-edit.component';
+
 const appRoutes: Routes = [
   { path: '', redirectTo: '/games', pathMatch: 'full'}, 
   { path: 'games', component: GamesComponent, children: [
@@ -30,8 +35,7 @@ const appRoutes: Routes = [
   ]},
   { path: 'developers', component: DevelopersComponent, children: [
     { path: '', component: DeveloperStartComponent},
-    {path: ':id', component: DeveloperDetailComponent }
-
+    {path: ':id', component: DeveloperDetailComponent, canActivate: [AuthGuard]}
   ]},
   { path: 'characters', component: CharactersComponent, children: [
     { path: '', component: CharacterStartComponent},
@@ -41,6 +45,13 @@ const appRoutes: Routes = [
   ]},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
+
+  { path: 'favorites', component: FavoritesComponent, children: [
+    { path: '', component: FavoriteStartComponent},
+    { path: 'edit', component: FavoriteEditComponent , canActivate: [AuthGuard]},
+    { path: ':id', component: FavoriteDetailComponent }
+  ]},
+
 ];
 
 @NgModule({

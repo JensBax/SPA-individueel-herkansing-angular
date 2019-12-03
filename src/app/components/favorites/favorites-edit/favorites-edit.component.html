@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success" [disabled]="!gameForm.valid">Save</button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" formControlName="name" class="form-control" ngModel="{{currentGame?.name}}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="imagePath">Image URL</label>
+              <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePathGame ngModel="{{currentGame?.imagePath}}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <img [src]="imagePathGame.value" class="img-responsive">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea type="text" id="description" class="form-control" formControlName="description" rows="6"
+              ngModel={{currentGame?.description}}></textarea>
+            </div>
+          </div>
+        </div> -->
+        <div class="row">
+            <div class="col-xs-12" formArrayName="favoriteGames">
+                <div class="row" *ngFor="let favoriteGameCtrl of gameForm['controls'].favoriteGames['controls']; let i = index" [formGroupName]="i"
+                  style="margin-top: 10px;">
+                  <pre *ngIf="favoriteGameCtrl">{{ favoriteGameCtrl.value | json }}</pre>
+                  <div class="col-xs-8">
+                    <label for="name">Name</label>                          
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+                  <div class="col-xs-8">
+                    <label for="description">Description</label>                          
+                    <input type="text" class="form-control" formControlName="description">
+                  </div>
+                  <div class="col-xs-8">
+                      <label for="imagePath">Image URL</label>                          
+                      <input type="text" class="form-control" #imagePathFavoriteGame formControlName="imagePath">
+                  </div>
+                  <div class="col-xs-2">
+                    <p></p>
+                    <button type="button" class="btn btn-danger" (click)="onDeleteFavoriteGame(i)">Delete</button>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <img [src]="imagePathFavoriteGame.value" class="img-responsive">
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <br/>
+              </div>
+        </div>
+      </form>
+    </div>
+  </div>

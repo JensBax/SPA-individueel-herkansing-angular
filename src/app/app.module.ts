@@ -12,6 +12,7 @@ import { DropdownDirective } from './components/shared/dropdown.directives';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from "./components/helpers/jwt.interceptor";
 import { AuthGuard } from "./guards/auth.guard";
+import { ToastrModule } from 'ngx-toastr';
 
 import { GameService } from './services/game.service';
 import { GamesComponent } from './components/games/games.component';
@@ -41,6 +42,13 @@ import { CharacterEditComponent } from './components/characters/character-edit/c
 import { CharacterDetailComponent } from './components/characters/character-detail/character-detail.component';
 import { CharactersComponent } from './components/characters/characters.component';  
 
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { FavoriteListComponent } from './components/favorites/favorites-list/favorites-list.component';
+import { FavoriteItemComponent } from './components/favorites/favorites-list/favorites-item/favorites-item.component'
+import { FavoriteStartComponent } from './components/favorites/favorites-start/favorites-start.component';
+import { FavoriteEditComponent } from './components/favorites/favorites-edit/favorites-edit.component';
+import { FavoriteDetailComponent } from './components/favorites/favorites-detail/favorites-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +71,13 @@ import { CharactersComponent } from './components/characters/characters.componen
     CharacterEditComponent,
     CharacterDetailComponent,
     CharacterListComponent,
-    CharacterItemComponent
+    CharacterItemComponent,
+    FavoritesComponent,
+    FavoriteListComponent,
+    FavoriteItemComponent,
+    FavoriteStartComponent,
+    FavoriteEditComponent,
+    FavoriteDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +86,8 @@ import { CharactersComponent } from './components/characters/characters.componen
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

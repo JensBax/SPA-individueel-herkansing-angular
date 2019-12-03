@@ -5,6 +5,7 @@ import { loginUser } from '../models/loginuser.model';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class LoginService {
   private currentUserSubject: BehaviorSubject<storeUser>;
   public currentUser: Observable<storeUser>;
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http, private router: Router, private toastr: ToastrService) {
     this.currentUserSubject = new BehaviorSubject<storeUser>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -29,19 +30,22 @@ export class LoginService {
     this.http.post(this.loginUrl, {username: user.username, password: user.password}, {headers: this.headers})
     .toPromise()
     .then(response => {
-      const responseUser = new storeUser(response.json().id, response.json().username, response.json().token);
+      console.log(response.json())
+      const responseUser = new storeUser(response.json()._id, response.json().username, response.json().password, response.json().token, response.json().favoriteGames);
       localStorage.setItem('currentUser', JSON.stringify(responseUser));
       this.currentUserSubject.next(responseUser);
+      this.toastr.success("Login succesfull!")
       this.router.navigate(['/games']); 
     })
     .catch( error => {
-      console.log(error);
+      this.toastr.error(error.json().error);
     });
   }
 
   public logout(){
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.toastr.success("Logout succesfull!")
     this.router.navigate(["/login"])
   }
 }

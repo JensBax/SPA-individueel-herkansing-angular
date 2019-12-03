@@ -4,8 +4,10 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { GameService } from '../../../services/game.service';
 import { DeveloperService } from '../../../services/developer.service';
+import { CharacterService } from '../../../services/character.service';
 import { Game } from '../../../models/game.model';
 import { Developer } from '../../../models/developer.model';
+import { Character } from '../../../models/character.model';
 
 @Component({
   selector: 'app-game-edit',
@@ -16,12 +18,14 @@ export class GameEditComponent implements OnInit {
   editMode = false;
   gameForm: FormGroup;
   currentGame: Game = null;
-  developers: Developer[]
+  characters: Character[];
+  developers: Developer[];
 
   constructor(private route: ActivatedRoute,
               private gameService: GameService,
               private router: Router,
-              private developerService: DeveloperService) {
+              private developerService: DeveloperService,
+              private characterService: CharacterService) {
   }
 
   ngOnInit() {
@@ -36,7 +40,16 @@ export class GameEditComponent implements OnInit {
               this.currentGame = game
             })
             .catch(error => console.log(error))
+            this.characterService.getCharacters()
+            .then( characters => this.characters = characters )
+            .catch(error => console.log(error))
           }
+          this.characterService.getCharacters()
+          .then( characters => this.characters = characters )
+          .catch(error => console.log(error))
+          this.developerService.getDevelopers()
+          .then( developers => this.developers = developers)
+          .catch(error => console.log(error))
           this.initForm();
         }
       );
@@ -46,55 +59,33 @@ export class GameEditComponent implements OnInit {
     if (this.editMode) {
       this.gameService.updateGame(this.id, this.gameForm.value);
     } else {
-      // this.onCheckDeveloper(this.gameForm.value.developers);
       this.gameService.addGame(this.gameForm.value);
     }
     this.onCancel();
-  }
-
-  onAddCharacter() {
-    (<FormArray>this.gameForm.get('characters')).push(
-      new FormGroup({
-        'name': new FormControl(null, Validators.required),
-        'description': new FormControl(null, Validators.required),
-        'imagePath': new FormControl(null, Validators.required)
-      })
-    );
   }
 
   onDeleteCharacter(index: number) {
     (<FormArray>this.gameForm.get('characters')).removeAt(index);
   }
 
-  onAddDeveloper() {
-    (<FormArray>this.gameForm.get('developers')).push(
+  onAddCharacter(character: Character){
+    (<FormArray>this.gameForm.get('characters')).push(
       new FormGroup({
-        'name': new FormControl(null, Validators.required),
-        'imagePath': new FormControl(null, Validators.required)
+        'name': new FormControl(character.name, Validators.required),
+        'description': new FormControl(character.description, Validators.required),
+        'imagePath': new FormControl(character.imagePath, Validators.required)
       })
     );
   }
 
-  // onCheckDeveloper(inDevelopers: Developer[]){
-  //   console.log(inDevelopers);
-  //   this.developerService.getDevelopers()
-  //   .then(developers => {
-  //       this.developers = developers
-  //       inDevelopers.forEach(developer =>{
-  //       for(var i=0; i <= developers.length; i++){
-  //         if(i == developers.length){
-  //           this.developerService.addDeveloper(developer);
-  //         }else if(developers[i].name !== developer.name){
-  //           console.log("Developer bestaat nog niet " + developer.name);
-  //           console.log([i]+ " " +developers[i].name);
-  //           console.log(developer.name);
-  //         }
-  //       }
-  //     })
-  //       console.log(this.developers);
-  //   })
-  //   .catch(error => console.log(error));
-  // }
+  onAddDeveloper(developer: Developer) {
+    (<FormArray>this.gameForm.get('developers')).push(
+      new FormGroup({
+        'name': new FormControl(developer.name, Validators.required),
+        'imagePath': new FormControl(developer.imagePath, Validators.required)
+      })
+    );
+  }
 
   onDeleteDeveloper(index: number) {
     (<FormArray>this.gameForm.get('developers')).removeAt(index);

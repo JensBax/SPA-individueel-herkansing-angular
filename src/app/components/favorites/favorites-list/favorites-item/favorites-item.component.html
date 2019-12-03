@@ -1,0 +1,16 @@
+<a
+style='cursor: pointer;'
+[routerLink]="[index]"
+routerLinkActive='active'
+class="list-group-item clearfix"
+>
+<div class="media">
+    <div class="media-left">
+      <img [src]="favoriteGame.imagePath" class="media-object" style="width:80px">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ favoriteGame.name }}</h4>
+      <p>{{ favoriteGame.description }}</p>
+    </div>
+  </div>
+</a>
