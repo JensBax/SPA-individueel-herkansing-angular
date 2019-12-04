@@ -77,7 +77,7 @@ import { FavoriteDetailComponent } from './components/favorites/favorites-detail
     FavoriteItemComponent,
     FavoriteStartComponent,
     FavoriteEditComponent,
-    FavoriteDetailComponent
+    FavoriteDetailComponent,
   ],
   imports: [
     BrowserModule,

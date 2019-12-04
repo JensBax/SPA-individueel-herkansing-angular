@@ -40,7 +40,7 @@ export class FavoriteListComponent implements OnInit {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
-//   ngOnDestroy() {
-//    this.subscription.unsubscribe();
-//   }
+  ngOnDestroy() {
+   this.subscription.unsubscribe();
+  }
 }

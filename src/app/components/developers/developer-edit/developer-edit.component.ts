@@ -42,6 +42,11 @@ import { Subscription } from 'rxjs';
   
     onSubmit(form: NgForm) {
       const value = form.value;
+      this.EditDeveloper(value);
+      form.reset();
+    }
+
+    EditDeveloper(value: any){
       const newDeveloper = new Developer(value.name, value.imagePath);
       if (this.editMode) {
         this.developerService.updateDeveloper(this.editedItemId, newDeveloper);
@@ -49,7 +54,6 @@ import { Subscription } from 'rxjs';
         this.developerService.addDeveloper(newDeveloper);
       }
       this.editMode = false;
-      form.reset();
     }
   
     onDelete() {

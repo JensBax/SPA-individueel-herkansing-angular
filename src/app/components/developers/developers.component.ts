@@ -32,6 +32,7 @@ export class DevelopersComponent implements OnInit {
     }
 
 onEditItem(id:number){
+  console.log(id);
   this.router.navigate([id],{relativeTo: this.route})
   this.developerService.startedEditing.next(id);
 }
