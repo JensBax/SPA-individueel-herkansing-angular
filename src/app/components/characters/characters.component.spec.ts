@@ -85,6 +85,6 @@ describe('CharactersComponent', () => {
   });
 
   it('should have title Characters', () => {
-    expect(component.title).toBe('Characters')
+    expect(component.title).toBe('Characters')  
 })
 });
