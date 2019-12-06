@@ -39,7 +39,7 @@ export class CharacterDetailComponent implements OnInit {
 
   onDeleteCharacter(){
     if(this.loginService.currentUserValue){
-        // this.characterService.deleteCharacter(this.id);
+        this.characterService.deleteCharacter(this.id);
         this.router.navigate(['/characters']);
     }else{
         this.router.navigate(['/login'])
