@@ -46,9 +46,9 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
 
-  { path: 'favorites', component: FavoritesComponent, children: [
+  { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard], children: [
     { path: '', component: FavoriteStartComponent},
-    { path: 'edit', component: FavoriteEditComponent , canActivate: [AuthGuard]},
+    { path: 'edit', component: FavoriteEditComponent , },
     { path: ':id', component: FavoriteDetailComponent }
   ]},
 

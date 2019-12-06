@@ -8,11 +8,11 @@
             <form (ngSubmit)="register(f)" #f="ngForm">
                 <label for="username" class="cols-sm-2 control-label">Your Username*</label>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="username" ngModel required #username="ngModel"/>
+                    <input type="text" class="form-control" name="username" placeholder="username" ngModel required #username="ngModel" pattern="[A-Za-z0-9]+"/>
                 </div>
                 <label for="password" class="cols-sm-2 control-label">Your Password*</label>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="password" ngModel required/>
+                    <input type="password" class="form-control" name="password" placeholder="password" minlength="4" ngModel required/>
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
                     Register

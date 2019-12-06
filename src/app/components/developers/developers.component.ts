@@ -19,9 +19,10 @@ export class DevelopersComponent implements OnInit {
   constructor(private developerService: DeveloperService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.developerService.getDevelopers()
-      .then(developers => this.developers = developers)
-      .catch(error => console.log(error));
+    // this.developerService.getDevelopers()
+    //   .then(developers => this.developers = developers)
+    //   .catch(error => console.log(error));
+    this.getDevelopers()
 
       this.subscription = this.developerService.developersChanged
       .subscribe(
@@ -31,13 +32,19 @@ export class DevelopersComponent implements OnInit {
       );
     }
 
-onEditItem(id:number){
-  console.log(id);
-  this.router.navigate([id],{relativeTo: this.route})
-  this.developerService.startedEditing.next(id);
-}
+    getDevelopers(){
+      this.developerService.getDevelopers()
+      .then(developers => this.developers = developers)
+      .catch(error => console.log(error));
+    }
 
-ngOnDestroy(){
- this.subscription.unsubscribe();
-}
+    onEditItem(id:number){
+      console.log(id);
+      this.router.navigate([id],{relativeTo: this.route})
+      this.developerService.startedEditing.next(id);
+    }
+
+    ngOnDestroy(){
+    this.subscription.unsubscribe();
+    }
 }

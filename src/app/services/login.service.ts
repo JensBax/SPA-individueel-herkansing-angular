@@ -43,9 +43,13 @@ export class LoginService {
   }
 
   public logout(){
+    if(this.currentUserValue == null){
+      this.toastr.info("Nobody was logged in")
+    }else{ 
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.toastr.success("Logout succesfull!")
     this.router.navigate(["/login"])
+    }
   }
 }

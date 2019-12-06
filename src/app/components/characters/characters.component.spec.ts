@@ -29,9 +29,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 
-describe('GamesComponent', () => {
-  let component: GamesComponent;
-  let fixture: ComponentFixture<GamesComponent>;
+describe('CharactersComponent', () => {
+  let component: CharactersComponent;
+  let fixture: ComponentFixture<CharactersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -75,7 +75,7 @@ describe('GamesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GamesComponent);
+    fixture = TestBed.createComponent(CharactersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -84,7 +84,7 @@ describe('GamesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have title Games', () => {
-      expect(component.title).toBe('Games')
-  })
+  it('should have title Characters', () => {
+    expect(component.title).toBe('Characters')
+})
 });

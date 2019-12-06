@@ -4,8 +4,6 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { CharacterService } from '../../../services/character.service';
 import { Character } from '../../../models/character.model'
-// import { FilmService } from '../../../services/film.service';
-// import { Film } from '../../../models/film.model';
 
 @Component({
   selector: 'app-character-edit',
@@ -15,8 +13,6 @@ export class CharacterEditComponent implements OnInit {
   id: number;
   editMode = false;
   characterForm: FormGroup;
-//   films: Film[];
-//   currentFilm : Film = null;
   currentCharacter : Character = null;
 
   constructor(private route: ActivatedRoute,
@@ -40,11 +36,6 @@ export class CharacterEditComponent implements OnInit {
           this.initForm();
         }
       );
-//       this.filmservice.getFilms()
-//       .then(films => {
-//         this.films = films
-//   })
-    // .catch(error => console.log(error));
   }
 
 
@@ -53,8 +44,6 @@ export class CharacterEditComponent implements OnInit {
     if (this.editMode) {
       this.characterService.updateCharacter(this.id, this.characterForm.value);
     } else {
-    //   console.log("on submit " + this.currentFilm.name)
-    //   this.characterService.addCharacter(this.characterForm.value,this.currentFilm._id );
       this.characterService.addCharacter(this.characterForm.value);
     }
     this.onCancel();
@@ -90,10 +79,4 @@ export class CharacterEditComponent implements OnInit {
       'description': new FormControl(characterDescription, Validators.required),
     });
   }
-
-//   onChangeFilm(film:Film){
-//     this.currentFilm = film;
-//     console.log("changefilm to " + film)
-//   }
-
 }

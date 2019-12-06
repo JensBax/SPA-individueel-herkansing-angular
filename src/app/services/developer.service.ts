@@ -31,12 +31,16 @@ export class DeveloperService {
         console.log(this.developers);
         return this.developers
       })
-      .catch(error => { return this.handleError(error) });
+      .catch(error => { 
+        console.log(error)
+        return this.handleError(error) 
+      });
 
   }
 
   public getDeveloper(index: number): Promise<Developer> {
     console.log('Developer ophalen met id');
+    console.log(this.developers[index]._id)
     return this.http.get(this.serverUrl + '/' + this.developers[index]._id, { headers: this.headers })
       .toPromise()
       .then(response => {
